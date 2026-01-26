@@ -19,7 +19,7 @@ It utilizes the Adaptive Percentage Normalization (APN) algorithm to prepare raw
 
 ## 📥 Installation
 
-1.  **Download**: Locate the file named `Adaptive_Percentage-Normalization-1.0.0.jar` in the file list above (the main directory of this repository). Click on the file name and then click the **Download** button (or "View raw").
+1.  **Download**: Locate the file named `Adaptive_Percentage-Normalization-1.0.0.jar` in the file list above (the main directory of this repository) and download it.
 2.  **Install**: Copy the downloaded `.jar` file into the `plugins/` folder of your ImageJ or Fiji directory.
 3.  **Restart**: Restart ImageJ/Fiji to complete the installation.
 
@@ -38,10 +38,9 @@ It utilizes the Adaptive Percentage Normalization (APN) algorithm to prepare raw
 
 Below is a comparison showing the removal of baseline noise and hot pixel artifacts.
 
-| Raw Image (Before) | APN Processed (After) |
+| Raw Image | APN Processed |
 | :---: | :---: |
 | ![Raw Image](images/RAW.png) | ![APN Result](images/APN.png) |
-| *Original image with baseline drift* | *Normalized output ready for training* |
 
 
 ## 🛠 Building from Source
