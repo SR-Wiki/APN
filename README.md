@@ -1,4 +1,4 @@
-# IPIC-APN: Adaptive Percentage Normalization
+# APN: Adaptive Percentage Normalization
 
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)
 ![Build](https://img.shields.io/badge/Build-Maven-orange.svg)
