@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 <p align="center">
-  <img src="docs/gui_preview.png" alt="IPIC GUI Interface" width="600">
+  <img src="images/GUI.png" alt="IPIC GUI Interface" width="600">
   <br>
   <em>The IPIC-APN User Interface</em>
 </p>
@@ -40,7 +40,7 @@ Below is a comparison showing the removal of baseline noise and hot pixel artifa
 
 | Raw Image (Before) | APN Processed (After) |
 | :---: | :---: |
-| ![Raw Image](docs/raw_preview.png) | ![APN Result](docs/processed_preview.png) |
+| ![Raw Image](images/RAW.png) | ![APN Result](images/APN.png) |
 | *Original image with baseline drift* | *Normalized output ready for training* |
 
 
