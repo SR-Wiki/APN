@@ -17,7 +17,7 @@ It utilizes the Adaptive Percentage Normalization (APN) algorithm to prepare raw
 
 ## 🚀 Usage
 
-1.  **Open Image**: Load your target image or stack (supports 8-bit, 16-bit, and 32-bit).
+1.  **Open Image**: Load your target image or stack.
 2.  **Run Plugin**: Navigate to the menu bar:
     `Plugins > APN Tool > Run APN`.
 3.  **Process**:
