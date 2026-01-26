@@ -11,20 +11,20 @@ It utilizes the Adaptive Percentage Normalization (APN) algorithm to prepare raw
 
 ## 📥 Installation
 
-1.  **Download**: Get the latest `.jar` file (e.g., `Adaptive_Percentage-Normalization-1.0.0.jar`) from the [Releases](../../releases) page.
-2.  **Install**: Copy the downloaded file into the `plugins/` folder of your ImageJ or Fiji directory.
-3.  **Restart**: Restart ImageJ/Fiji to complete the installation.
+1.  **Download**: Locate the file named `Adaptive_Percentage-Normalization-1.0.0.jar` in the file list above (the main directory of this repository). Click on the file name and then click the **Download** button (or "View raw").
+2.  [cite_start]**Install**: Copy the downloaded `.jar` file into the `plugins/` folder of your ImageJ or Fiji directory[cite: 1].
+3.  [cite_start]**Restart**: Restart ImageJ/Fiji to complete the installation[cite: 107].
 
 ## 🚀 Usage
 
 1.  **Open Image**: Load your target image or stack (supports 8-bit, 16-bit, and 32-bit).
 2.  **Run Plugin**: Navigate to the menu bar:
-    `Plugins > APN Tool > Run APN`.
+    [cite_start]`Plugins > APN Tool > Run APN`[cite: 107].
 3.  **Process**:
-    * Click **Start Processing**.
+    * [cite_start]Click **Start Processing**[cite: 107].
 4.  **Output**:
     * The plugin generates a normalized version of the image/stack.
-    * It also displays the histogram with the calculated percentile thresholds used for the normalization.
+    * [cite_start]It also displays the histogram with the calculated percentile thresholds used for the normalization[cite: 113].
 
 ## 🖼️ Screenshots
 
@@ -37,7 +37,7 @@ It utilizes the Adaptive Percentage Normalization (APN) algorithm to prepare raw
 
 ## 🛠 Building from Source
 
-This project is managed by **Maven**. To compile the plugin yourself:
+[cite_start]This project is managed by **Maven**[cite: 2]. To compile the plugin yourself:
 
 1.  Clone the repository:
     ```bash
