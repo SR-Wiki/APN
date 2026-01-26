@@ -13,7 +13,7 @@
 
 ## Introduction
 
-**IPIC-APN** is a preprocessing tool designed for **unsupervised learning denoising** workflows in ImageJ/Fiji.
+**IPIC-APN** is an ImageJ/Fiji plugin specifically designed for **unsupervised learning denoising**.
 
 It utilizes the Adaptive Percentage Normalization (APN) algorithm to prepare raw image data for downstream analysis. By automatically calculating optimal intensity thresholds, this plugin **effectively mitigates the influence of baseline drift and hot pixels**, providing a cleaner and more consistent input for deep learning models or advanced analysis.
 
