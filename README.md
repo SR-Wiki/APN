@@ -48,13 +48,13 @@ To address this, SR-Wiki integrates a set of seven normalization and standardiza
 
 | Mode | Mathematical Principle | Typical Use Case | Output |
 | :--- | :--- | :--- | :--- |
-| **APN (Adaptive)** | Data-driven estimation of signal/background bounds using local statistics | Low-SNR microscopy, real biological data | 8-bit |
-| **Percentile** | Clipping based on user-defined percentiles | Controlled removal of outliers | 8-bit |
-| **Min-Max** | Linear scaling using global min/max | Clean images with stable intensity range | 8-bit |
-| **Max Only** | Scaling based on global maximum | Pre-calibrated data with zero background | 8-bit |
-| **Z-Score** | $z = (x - \mu)/\sigma$ | Deep learning preprocessing | 32-bit float |
-| **Mean** | $(x - \mu)/(max - min)$ | Centered normalization for analysis | 32-bit float |
-| **Vector** | $x / \|x\|_2$ | Energy normalization / feature comparison | 32-bit float |
+| **APN (Adaptive)** | Data-driven estimation of signal/background bounds using local statistics | Low-SNR microscopy, real biological data |
+| **Percentile** | Clipping based on user-defined percentiles | Controlled removal of outliers |
+| **Min-Max** | Linear scaling using global min/max | Clean images with stable intensity range |
+| **Max Only** | Scaling based on global maximum | Pre-calibrated data with zero background |
+| **Z-Score** | $z = (x - \mu)/\sigma$ | Deep learning preprocessing |
+| **Mean** | $(x - \mu)/(max - min)$ | Centered normalization for analysis |
+| **Vector** | $x / \|x\|_2$ | Energy normalization / feature comparison |
 
 ---
 
