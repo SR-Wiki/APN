@@ -5,7 +5,7 @@
 [![License: ODbL](https://img.shields.io/badge/License-ODbL_1.0-lightgrey.svg)](https://opendatacommons.org/licenses/odbl/)
 
 <p align="center">
-  <img src="images/GUI.png" alt="GUI Interface" width="800">
+  <img src="images/GUI.png" alt="GUI Interface" width="900">
   <br>
   <em>The SR-Wiki Normalization User Interface</em>
 </p>
