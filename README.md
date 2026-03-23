@@ -1,63 +1,74 @@
-# APN: Adaptive Percentage Normalization
+# SRWiki Normalization
 
-![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)
-![Build](https://img.shields.io/badge/Build-Maven-orange.svg)
+![Version](https://img.shields.io/badge/Version-3.0-blue.svg)
 ![Platform](https://img.shields.io/badge/Platform-ImageJ%2FFiji-red.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
-<p align="center">
-  <img src="images/GUI.png" alt="IPIC GUI Interface" width="600">
-  <br>
-  <em>The IPIC-APN User Interface</em>
-</p>
+## 📖 Overview
 
-## Introduction
+**SRWiki Normalization** (formerly the APN Tool) is a comprehensive ImageJ/Fiji plugin designed for the robust preprocessing of biological microscopy images. 
 
-**IPIC-APN** is an ImageJ/Fiji plugin specifically designed for **unsupervised learning denoising**.
+While raw microscopy data often suffers from baseline drift, inconsistent contrast, and hot pixels, this plugin offers 7 distinct normalization and standardization modes to clean and prepare your data. It is highly optimized for downstream tasks such as **unsupervised deep learning denoising**, quantitative analysis, and high-fidelity image visualization.
 
-It utilizes the Adaptive Percentage Normalization (APN) algorithm to prepare raw image data for downstream analysis. By automatically calculating optimal intensity thresholds, this plugin **effectively mitigates the influence of baseline drift and hot pixels**, providing a cleaner and more consistent input for deep learning models or advanced analysis.
+---
 
 ## 📥 Installation
 
-1.  **Download**: Locate the file named `Adaptive_Percentage-Normalization-1.0.0.jar` in the file list above (the main directory of this repository) and download it.
-2.  **Install**: Copy the downloaded `.jar` file into the `plugins/` folder of your ImageJ or Fiji directory.
-3.  **Restart**: Restart ImageJ/Fiji to complete the installation.
+1. **Download**: Obtain the latest `SRWiki_Normalization.jar` file from the releases page.
+2. **Install**: Place the `.jar` file into the `plugins/` directory of your ImageJ or Fiji installation.
+3. **Restart**: Restart ImageJ/Fiji.
+4. **Launch**: Navigate to `Plugins > SRWiki > SRWiki Normalization` in the top menu bar.
 
-## 🚀 Usage
+---
 
-1.  **Open Image**: Load your target image or stack.
-2.  **Run Plugin**: Navigate to the menu bar:
-    `Plugins > APN Tool > Run APN`.
-3.  **Process**:
-    * Click **Start Processing**.
-4.  **Output**:
-    * The plugin generates a normalized version of the image/stack.
-    * It also displays the histogram with the calculated percentile thresholds used for the normalization.
+## 🚀 Normalization Modes & Use Cases
 
-## 📊 Comparison: Raw vs. APN
+The plugin dynamically maps inputs (8-bit, 16-bit, or 32-bit) into an internal computational space, applies the selected mathematical model, and outputs either an 8-bit or 32-bit Float image.
 
-Below is a comparison showing the removal of baseline noise and hot pixel artifacts.
+| Mode | Mathematical Logic | Best Used For... | Output Format |
+| :--- | :--- | :--- | :--- |
+| **Adaptive (APN)** | Auto-calculates thresholds by isolating true signal from background using local block statistics. | **Raw microscopy images** with hot pixels, baseline drift, or complex noise. | 8-bit |
+| **Percentile** | Clips intensities based on user-defined Lower and Upper percentiles. | Images with a known percentage of outlier pixels (e.g., dead camera pixels). | 8-bit |
+| **Min-Max** | Linear scaling from the absolute minimum to the absolute maximum. | Clean images requiring a simple dynamic range stretch. | 8-bit |
+| **Max Only** | Scales based entirely on the maximum pixel intensity. | Calibrated images where the background is already zeroed out. | 8-bit |
+| **Z-Score** | Standardization: $z = \frac{x - \mu}{\sigma}$ | **Deep learning (CNN) inputs** requiring a standard normal distribution (zero mean, unit variance). | 32-bit Float |
+| **Mean** | Mean Normalization: $x' = \frac{x - \mu}{\max - \min}$ | Centering data distributions while strictly maintaining relative intensity ranges. | 32-bit Float |
+| **Vector** | L2 Normalization: $x' = \frac{x}{\|X\|_2}$ | Standardizing the total "energy" of an image for cross-correlation or feature matching. | 32-bit Float |
 
-| Raw Image | APN Processed |
-| :---: | :---: |
-| ![Raw Image](images/RAW.png) | ![APN Result](images/APN.png) |
-| *Original image with baseline drift/hot pixels* | *Normalized output ready for training* |
+---
 
-## 🛠 Building from Source
+## ⚙️ Parameters & Stack Processing
 
-This project is managed by **Maven**. To compile the plugin yourself:
+When you launch the plugin, the GUI presents several customizable parameters:
 
-1.  Clone the repository:
-    ```bash
-    git clone [https://github.com/YourUsername/APN_Adaptive-Percentage-Normalization.git](https://github.com/YourUsername/APN_Adaptive-Percentage-Normalization.git)
-    ```
-2.  Navigate to the project directory containing the `pom.xml`.
-3.  Build using Maven:
-    ```bash
-    mvn clean package
-    ```
-4.  The compiled `.jar` file will be located in the `target/` directory.
+### General Settings
+* **Lower Percentile (%)**: Determines the lower cutoff threshold. Values below this percentile are clamped. *(Default: 1.0)*
+* **Upper Percentile (%)**: Determines the upper cutoff threshold. Values above this percentile are clamped. *(Default: 99.8)*
+    * *Note: The Percentile settings are only active when the **Percentile** mode is selected.*
+* **Show Histogram**: If checked, the plugin will generate a histogram plot after processing, visualizing the pixel distribution and drawing vertical lines to indicate the calculated lower and upper thresholds.
 
-## 📄 License
+### 📚 Stack Processing Logic (Crucial for Time-Lapse & Z-Stacks)
+If you apply this plugin to an Image Stack, it employs a **Reference-Frame Strategy**:
+1. The plugin analyzes **Slice 1** to compute all necessary statistical metrics (e.g., APN thresholds, Mean, Standard Deviation, Max values).
+2. It then applies these exact same metrics globally to **all subsequent slices** in the stack.
+3. **Why?** This prevents flickering and ensures that relative intensity changes across time or depth are perfectly preserved.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+---
+
+## 🛠 Methodology: How APN Works
+
+The **Adaptive (APN)** mode is the flagship feature of this plugin, designed to solve the problem of standard normalizations failing when faced with large, empty, noisy backgrounds.
+
+1. **Block Division**: The image is virtually split into `64x64` pixel blocks.
+2. **Feature Extraction**: For each block, the algorithm calculates three metrics:
+   * **Intensity Standard Deviation**: To measure local contrast.
+   * **Frequency Standard Deviation**: Uses a Fast Hartley Transform (FHT) to measure high-frequency detail.
+   * **Kurtosis**: To measure the "tailedness" of the distribution (identifying flat backgrounds vs. sharp structures).
+3. **Signal vs. Background Identification**: Blocks with high kurtosis and low frequency SD are flagged as background/noise and excluded.
+4. **Threshold Calculation**: The plugin calculates the final minimum and maximum normalization thresholds using *only* the data from the valid signal blocks, entirely ignoring hot pixels and empty space.
+
+---
+
+## 📝 License
+
+This project is licensed under the **MIT License**.
