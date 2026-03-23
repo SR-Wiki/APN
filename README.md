@@ -49,7 +49,7 @@ To address this, SR-Wiki integrates a set of seven normalization and standardiza
 | Mode | Mathematical Principle | Best Used For |
 | :--- | :--- | :--- |
 | **APN (Adaptive)** | $x' = \dfrac{x - X_{\min}^{\text{(bg)}}}{X_{\max}^{\text{(sig)}} - X_{\min}^{\text{(bg)}}} \times 255$ | Low-SNR microscopy, real biological data |
-| **Percentile** | $x' = \mathrm{clip}\!\left(\dfrac{x - P_{\text{low}}}{P_{\text{high}} - P_{\text{low}}},\,0,\,1\right)\times 255$ | Controlled removal of outliers |
+| **Percentile** | $x' = \mathrm{clip}\left(\dfrac{x - P_{\text{low}}}{P_{\text{high}} - P_{\text{low}}},\,0,\,1\right)\times 255$ | Controlled removal of outliers |
 | **Min-Max** | $x' = \dfrac{x - x_{\min}}{x_{\max} - x_{\min}} \times 255$ | Clean images with stable intensity range |
 | **Max Only** | $x' = \dfrac{x}{x_{\max}} \times 255$ | Pre-calibrated data with zero background |
 | **Z-Score** | $z = \dfrac{x - \mu}{\sigma}$ | Deep learning preprocessing |
