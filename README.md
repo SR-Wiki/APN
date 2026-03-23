@@ -10,46 +10,94 @@
   <em>The SR-Wiki Normalization User Interface</em>
 </p>
 
+---
+
 ## 📖 Overview
 
-**SR-Wiki Normalization** (formerly the APN Tool) is a comprehensive ImageJ/Fiji plugin designed for the robust preprocessing of biological microscopy images. 
+**SR-Wiki Normalization** is an ImageJ/Fiji plugin for **robust preprocessing of biological microscopy images**, with a particular focus on low signal-to-noise (low-SNR) fluorescence data.
 
-While raw microscopy data often suffers from baseline drift, inconsistent contrast, and hot pixels, this plugin offers 7 distinct normalization and standardization modes to clean and prepare your data. It is highly optimized for downstream tasks such as **unsupervised deep learning denoising**, quantitative analysis, and high-fidelity image visualization.
+Microscopy images often suffer from:
+- baseline drift  
+- uneven background  
+- hot pixels and sparse outliers  
+- weak structural signals buried in noise  
+
+Traditional global normalization methods (e.g., Min-Max) frequently fail under these conditions.  
+This plugin addresses these challenges by providing a **unified framework of 7 normalization and standardization methods**, centered around the **Adaptive Percentage Normalization (APN)** algorithm.
+
+> **Core idea:** Instead of relying solely on global intensity statistics, SR-Wiki introduces APN to **separate background and signal using local statistical structure**, enabling more reliable intensity scaling in challenging imaging conditions.
+
+The plugin is suitable for:
+- unsupervised deep learning denoising  
+- quantitative fluorescence analysis  
+- preprocessing pipelines  
+- high-quality visualization  
+
+---
+
+## 🚀 Why APN?
+
+### Problem with traditional normalization
+
+Standard normalization methods assume:
+- background is globally uniform  
+- signal distribution is well-behaved  
+- extreme values are rare  
+
+However, real microscopy data often violates these assumptions.
+
+As a result:
+- **Min-Max** over-amplifies noise  
+- **Max normalization** is dominated by hot pixels  
+- **Percentile normalization** still depends on manually chosen thresholds  
+
+---
+
+### APN: Adaptive, data-driven normalization
+
+**Adaptive Percentage Normalization (APN)** is designed specifically for microscopy data.
+
+Instead of using global extrema, APN:
+
+1. Divides the image into local blocks  
+2. Computes:
+   - frequency-domain statistics  
+   - grayscale variance  
+   - kurtosis (signal sharpness)  
+3. Separates:
+   - background-like regions  
+   - signal-like regions  
+4. Estimates:
+   - **Xmin from background regions**
+   - **Xmax from signal regions**
+
+---
+
+### Key Advantages of APN
+
+- **Robust to noise and background drift**  
+- **Insensitive to hot pixels and sparse outliers**  
+- **Automatically adapts to image content**  
+- **Better preserves weak biological structures**  
+- **No manual parameter tuning required**
+
+---
+
+### When to use APN
+
+Use **APN normalization** when:
+
+- your image has **low SNR**
+- background is **uneven or drifting**
+- weak structures are **hard to see**
+- Min-Max produces **washed-out contrast**
+- Percentile requires too much manual tuning
+
+> In most real microscopy scenarios, **APN should be your default choice**.
 
 ---
 
 ## 📥 Installation
 
-1. **Download**: Obtain the latest `SRWiki_Normalization.jar` file from the releases page.
-2. **Install**: Place the `.jar` file into the `plugins/` directory of your ImageJ or Fiji installation.
-3. **Restart**: Restart ImageJ/Fiji.
-4. **Launch**: Navigate to `Plugins > SRWiki > SRWiki Normalization` in the top menu bar.
-
----
-
-## 🚀 Normalization Modes & Use Cases
-
-The plugin dynamically maps inputs (8-bit, 16-bit, or 32-bit) into an internal computational space, applies the selected mathematical model, and outputs either an 8-bit or 32-bit Float image.
-
-| Mode | Mathematical Logic | Best Used For... | Output Format |
-| :--- | :--- | :--- | :--- |
-| **Adaptive (APN)** | Auto-calculates thresholds by isolating true signal from background using local block statistics. | **Raw microscopy images** with hot pixels, baseline drift, or complex noise. | 8-bit |
-| **Percentile** | Clips intensities based on user-defined Lower and Upper percentiles. | Images with a known percentage of outlier pixels (e.g., dead camera pixels). | 8-bit |
-| **Min-Max** | Linear scaling from the absolute minimum to the absolute maximum. | Clean images requiring a simple dynamic range stretch. | 8-bit |
-| **Max Only** | Scales based entirely on the maximum pixel intensity. | Calibrated images where the background is already zeroed out. | 8-bit |
-| **Z-Score** | Standardization: $z = \frac{x - \mu}{\sigma}$ | **Deep learning (CNN) inputs** requiring a standard normal distribution (zero mean, unit variance). | 32-bit Float |
-| **Mean** | Mean Normalization: $x' = \frac{x - \mu}{\max - \min}$ | Centering data distributions while strictly maintaining relative intensity ranges. | 32-bit Float |
-| **Vector** | L2 Normalization: $x' = \frac{x}{\|X\|_2}$ | Standardizing the total "energy" of an image for cross-correlation or feature matching. | 32-bit Float |
-
----
-
-## ⚙️ Parameters
-
-When you launch the plugin, the GUI presents several customizable parameters:
-
-### General Settings
-* **Lower Percentile (%)**: Determines the lower cutoff threshold. Values below this percentile are clamped. *(Default: 1.0)*
-* **Upper Percentile (%)**: Determines the upper cutoff threshold. Values above this percentile are clamped. *(Default: 99.8)*
-    * *Note: The Percentile settings are only active when the **Percentile** mode is selected.*
-* **Show Histogram**: If checked, the plugin will generate a histogram plot after processing, visualizing the pixel distribution and drawing vertical lines to indicate the calculated lower and upper thresholds.
-
+1. Download the latest `SRWiki_Normalization.jar`
+2. Copy it into:
