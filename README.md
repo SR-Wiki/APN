@@ -73,13 +73,3 @@ To address this, SR-Wiki integrates a set of seven normalization and standardiza
 These parameters allow manual control over intensity clipping when automatic methods are not preferred.
 
 ---
-
----
-
-## ⭐ Summary
-
-SR-Wiki Normalization provides a unified and extensible framework for microscopy image preprocessing. While multiple normalization strategies are available, the central contribution lies in the introduction of **Adaptive Percentage Normalization (APN)**.
-
-By leveraging local statistical structure instead of global extrema, APN enables more robust, adaptive, and biologically meaningful intensity normalization for challenging imaging conditions.
-
-In scenarios where traditional normalization fails, APN offers a principled and reliable alternative.
