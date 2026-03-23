@@ -37,7 +37,7 @@ The plugin dynamically maps inputs (8-bit, 16-bit, or 32-bit) into an internal c
 
 ---
 
-## ⚙️ Parameters & Stack Processing
+## ⚙️ Parameters
 
 When you launch the plugin, the GUI presents several customizable parameters:
 
@@ -47,6 +47,3 @@ When you launch the plugin, the GUI presents several customizable parameters:
     * *Note: The Percentile settings are only active when the **Percentile** mode is selected.*
 * **Show Histogram**: If checked, the plugin will generate a histogram plot after processing, visualizing the pixel distribution and drawing vertical lines to indicate the calculated lower and upper thresholds.
 
-## 📝 License
-
-This project is licensed under the **MIT License**.
