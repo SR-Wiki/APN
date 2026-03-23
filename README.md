@@ -46,15 +46,15 @@ To address this, SR-Wiki integrates a set of seven normalization and standardiza
 
 ## 📊 Normalization and Standardization Modes
 
-| Mode | Mathematical Principle | Typical Use Case | Output |
-| :--- | :--- | :--- | :--- |
-| **APN (Adaptive)** | Data-driven estimation of signal/background bounds using local statistics | Low-SNR microscopy, real biological data |
-| **Percentile** | Clipping based on user-defined percentiles | Controlled removal of outliers |
-| **Min-Max** | Linear scaling using global min/max | Clean images with stable intensity range |
-| **Max Only** | Scaling based on global maximum | Pre-calibrated data with zero background |
-| **Z-Score** | $z = (x - \mu)/\sigma$ | Deep learning preprocessing |
-| **Mean** | $(x - \mu)/(max - min)$ | Centered normalization for analysis |
-| **Vector** | $x / \|x\|_2$ | Energy normalization / feature comparison |
+| Mode | Mathematical Principle | Best Used For |
+| :--- | :--- | :--- |
+| **APN (Adaptive)** | $x' = \dfrac{x - X_{\min}^{\text{(bg)}}}{X_{\max}^{\text{(sig)}} - X_{\min}^{\text{(bg)}}} \times 255$ | Low-SNR microscopy, real biological data |
+| **Percentile** | $x' = \mathrm{clip}\!\left(\dfrac{x - P_{\text{low}}}{P_{\text{high}} - P_{\text{low}}},\,0,\,1\right)\times 255$ | Controlled removal of outliers |
+| **Min-Max** | $x' = \dfrac{x - x_{\min}}{x_{\max} - x_{\min}} \times 255$ | Clean images with stable intensity range |
+| **Max Only** | $x' = \dfrac{x}{x_{\max}} \times 255$ | Pre-calibrated data with zero background |
+| **Z-Score** | $z = \dfrac{x - \mu}{\sigma}$ | Deep learning preprocessing |
+| **Mean** | $x' = \dfrac{x - \mu}{x_{\max} - x_{\min}}$ | Centered normalization for analysis |
+| **Vector** | $x' = \dfrac{x}{\|x\|_2}$ | Energy normalization / feature comparison |
 
 ---
 
