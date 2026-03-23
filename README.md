@@ -25,7 +25,7 @@ To address this, SR-Wiki integrates a set of seven normalization and standardiza
 
 ## 📥 Installation
 
-1. Download the latest `SRWiki_Normalization.jar`
+1. Download the latest `srwiki_normalization-3.0.0.jar`
 2. Copy it into:ImageJ/Fiji/plugins/
 3. Restart ImageJ/Fiji
 4. Launch via:Plugins > SRWiki > SRWiki Normalization
