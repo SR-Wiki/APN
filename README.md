@@ -1,4 +1,4 @@
-# SRWiki Normalization
+# SR-Wiki Normalization
 
 ![Version](https://img.shields.io/badge/Version-3.0-blue.svg)
 ![Platform](https://img.shields.io/badge/Platform-ImageJ%2FFiji-red.svg)
@@ -6,7 +6,7 @@
 
 ## 📖 Overview
 
-**SRWiki Normalization** (formerly the APN Tool) is a comprehensive ImageJ/Fiji plugin designed for the robust preprocessing of biological microscopy images. 
+**SR-Wiki Normalization** (formerly the APN Tool) is a comprehensive ImageJ/Fiji plugin designed for the robust preprocessing of biological microscopy images. 
 
 While raw microscopy data often suffers from baseline drift, inconsistent contrast, and hot pixels, this plugin offers 7 distinct normalization and standardization modes to clean and prepare your data. It is highly optimized for downstream tasks such as **unsupervised deep learning denoising**, quantitative analysis, and high-fidelity image visualization.
 
