@@ -4,6 +4,12 @@
 ![Platform](https://img.shields.io/badge/Platform-ImageJ%2FFiji-red.svg)
 [![License: ODbL](https://img.shields.io/badge/License-ODbL_1.0-lightgrey.svg)](https://opendatacommons.org/licenses/odbl/)
 
+<p align="center">
+  <img src="image/GUI.png" alt="GUI Interface" width="600">
+  <br>
+  <em>The SR-Wiki Normalization User Interface</em>
+</p>
+
 ## 📖 Overview
 
 **SR-Wiki Normalization** (formerly the APN Tool) is a comprehensive ImageJ/Fiji plugin designed for the robust preprocessing of biological microscopy images. 
