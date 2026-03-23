@@ -2,7 +2,7 @@
 
 ![Version](https://img.shields.io/badge/Version-3.0-blue.svg)
 ![Platform](https://img.shields.io/badge/Platform-ImageJ%2FFiji-red.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)
 
 ## 📖 Overview
 
