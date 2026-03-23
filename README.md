@@ -47,28 +47,6 @@ When you launch the plugin, the GUI presents several customizable parameters:
     * *Note: The Percentile settings are only active when the **Percentile** mode is selected.*
 * **Show Histogram**: If checked, the plugin will generate a histogram plot after processing, visualizing the pixel distribution and drawing vertical lines to indicate the calculated lower and upper thresholds.
 
-### 📚 Stack Processing Logic (Crucial for Time-Lapse & Z-Stacks)
-If you apply this plugin to an Image Stack, it employs a **Reference-Frame Strategy**:
-1. The plugin analyzes **Slice 1** to compute all necessary statistical metrics (e.g., APN thresholds, Mean, Standard Deviation, Max values).
-2. It then applies these exact same metrics globally to **all subsequent slices** in the stack.
-3. **Why?** This prevents flickering and ensures that relative intensity changes across time or depth are perfectly preserved.
-
----
-
-## 🛠 Methodology: How APN Works
-
-The **Adaptive (APN)** mode is the flagship feature of this plugin, designed to solve the problem of standard normalizations failing when faced with large, empty, noisy backgrounds.
-
-1. **Block Division**: The image is virtually split into `64x64` pixel blocks.
-2. **Feature Extraction**: For each block, the algorithm calculates three metrics:
-   * **Intensity Standard Deviation**: To measure local contrast.
-   * **Frequency Standard Deviation**: Uses a Fast Hartley Transform (FHT) to measure high-frequency detail.
-   * **Kurtosis**: To measure the "tailedness" of the distribution (identifying flat backgrounds vs. sharp structures).
-3. **Signal vs. Background Identification**: Blocks with high kurtosis and low frequency SD are flagged as background/noise and excluded.
-4. **Threshold Calculation**: The plugin calculates the final minimum and maximum normalization thresholds using *only* the data from the valid signal blocks, entirely ignoring hot pixels and empty space.
-
----
-
 ## 📝 License
 
 This project is licensed under the **MIT License**.
